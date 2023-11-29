@@ -1,48 +1,74 @@
 
 let list = document.querySelector('[list]');
 let btn = document.querySelector('[enter]');
+let sortBtn = document.querySelector('[sort]');
 
 btn.addEventListener('click', toDo);
+sortBtn.addEventListener('click', sortTasks);
 
 function toDo() {
-    let enteredText = document.querySelector('[enteredList]').value.split(' ');
+    let enteredText = document.querySelector('[enteredList]').value.trim();
 
     if (enteredText) {
         let toDoItem = {
             text: enteredText,
-            timestamp: new Date().toLocaleString()
+            timestamp: new Date().toLocaleString(),
+            completed: false
         };
 
         // Create list item
         let listItem = document.createElement('li');
-        listItem.textContent = `${toDoItem.text} (Created on: ${toDoItem.timestamp})`;
 
-        // Create check button
-        let checkBtn = document.createElement('button');
-        checkBtn.textContent = 'Check';
-        checkBtn.addEventListener('click', () => {
-            // Handle check functionality (you can add your logic here)
-            alert(`Checked: ${toDoItem.text}`);
+        // Create checkbox
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', () => {
+            toDoItem.completed = checkbox.checked;
+            updateTaskStatus();
         });
+
+        // Display task text
+        let taskText = document.createElement('span');
+        taskText.textContent = `${toDoItem.text} (Created on: ${toDoItem.timestamp})`;
 
         // Create delete button
         let deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
         deleteBtn.addEventListener('click', () => {
-            // Handle delete functionality (you can add your logic here)
             listItem.remove();
         });
 
-        // Append buttons to the list item
-        listItem.appendChild(checkBtn);
+        // Append elements to the list item
+        listItem.appendChild(checkbox);
+        listItem.appendChild(taskText);
         listItem.appendChild(deleteBtn);
 
         // Append the list item to the list
         list.appendChild(listItem);
 
         // Clear the input field
-        document.getElementById('enteredList').value = '';
+        document.querySelector('[enteredList]').value = '';
     }
+}
+
+function updateTaskStatus() {
+    // Handle the task completion logic here
+}
+
+function sortTasks() {
+    // Sort tasks alphabetically
+    let items = Array.from(list.children);
+    items.sort((a, b) => {
+        let textA = a.textContent.toLowerCase();
+        let textB = b.textContent.toLowerCase();
+        return textA.localeCompare(textB);
+    });
+
+    // Clear the current list
+    list.innerHTML = '';
+
+    // Append sorted tasks to the list
+    items.forEach(item => list.appendChild(item));
 }
 
 
