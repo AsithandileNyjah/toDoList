@@ -1,49 +1,57 @@
-let toDoList = document.querySelector('[enteredList]').value.split(',');
-
-// No need to wrap it in an additional array
-let toDoListArray = toDoList;
 
 let list = document.querySelector('[list]');
-
-let display1 = document.querySelector('[display1]');
-let display2 = document.querySelector('[display2]');
-let display3 = document.querySelector('[display3]');
-let display4 = document.querySelector('[display4]');
-let display5 = document.querySelector('[display5]');
-
 let btn = document.querySelector('[enter]');
 
 btn.addEventListener('click', toDo);
 
 function toDo() {
-    let toDoList = document.querySelector('[enteredList]').value.split(',');
+    let enteredText = document.querySelector('[enteredList]').value.split(' ');
 
-    // No need to wrap it in an additional array
-    let toDoListArray = toDoList;
+    if (enteredText) {
+        let toDoItem = {
+            text: enteredText,
+            timestamp: new Date().toLocaleString()
+        };
 
-    console.log(toDoListArray[0]);
-    console.log(toDoListArray[1]);
-    console.log(toDoListArray[2]);
-    console.log(toDoListArray[3]);
-    console.log(toDoListArray[4]);
+        // Create list item
+        let listItem = document.createElement('li');
+        listItem.textContent = `${toDoItem.text} (Created on: ${toDoItem.timestamp})`;
 
-    display1.value = toDoListArray[0];
-    display2.value = toDoListArray[1];
-    display3.value = toDoListArray[2];
-    display4.value = toDoListArray[3];
-    display5.value = toDoListArray[4];
+        // Create check button
+        let checkBtn = document.createElement('button');
+        checkBtn.textContent = 'Check';
+        checkBtn.addEventListener('click', () => {
+            // Handle check functionality (you can add your logic here)
+            alert(`Checked: ${toDoItem.text}`);
+        });
+
+        // Create delete button
+        let deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', () => {
+            // Handle delete functionality (you can add your logic here)
+            listItem.remove();
+        });
+
+        // Append buttons to the list item
+        listItem.appendChild(checkBtn);
+        listItem.appendChild(deleteBtn);
+
+        // Append the list item to the list
+        list.appendChild(listItem);
+
+        // Clear the input field
+        document.getElementById('enteredList').value = '';
+    }
 }
 
 
-let cleanList = document.querySelector('[clear]')
 
-cleanList.addEventListener('click', clear)
+let klear = document.querySelector('[clear]')
+
+klear.addEventListener('click', clear)
 
 function clear (){
-    document.querySelector('[display1]').value = '';
-    document.querySelector('[display2]').value = '';
-    document.querySelector('[display3]').value = '';
-    document.querySelector('[display4]').value = '';
-    document.querySelector('[display5]').value = '';
     document.querySelector('[enteredList]').value = '';
+    document.querySelector('[list]').value = '';
 }
