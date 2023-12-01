@@ -23,8 +23,12 @@ function toDo() {
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.addEventListener('change', () => {
-            toDoItem.completed = checkbox;
+            toDoItem.completed = checkbox.completed;
             updateTaskStatus();
+            if (checkbox = checked){
+                taskElement.style.textDecoration = 'line-through';
+            }
+            
         });
         let taskText = document.createElement('span');
         taskText.textContent = `${toDoItem.text} (Created on: ${toDoItem.timestamp})`;
