@@ -4,6 +4,7 @@ let btn = document.querySelector('[enter]');
 let sortBtn = document.querySelector('[sort]');
 
 btn.addEventListener('click', toDo);
+btn.addEventListener('click', clear)
 sortBtn.addEventListener('click', sortTasks);
 
 function toDo() {
@@ -65,4 +66,7 @@ function sortTasks() {
 
     
     items.forEach(item => list.appendChild(item));
+}
+function clear (){
+    document.querySelector('[enteredList]').value = '';
 }
