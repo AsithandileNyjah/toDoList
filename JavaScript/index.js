@@ -32,7 +32,7 @@ function toDo() {
             
         });
         let taskText = document.createElement('span');
-        taskText.textContent = `${toDoItem.text} (Created on: ${toDoItem.timestamp})`;
+        taskText.textContent = `${toDoItem.text} (${toDoItem.timestamp})`;
 
         let deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'X';

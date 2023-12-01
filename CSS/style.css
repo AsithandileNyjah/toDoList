@@ -92,3 +92,28 @@ li button {
 .button-container {
     display: flex;
 }
+
+@media screen and (max-width: 300px) {
+    .sort {
+        margin-top: 20px;
+        padding: 8px 12px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        height: 38px;
+        margin-bottom: 5px;
+    }
+    #EnterBTN {
+        padding: 8px 12px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin-top: 5px;
+        height: 38px;
+        margin-right: 2rem;
+    }
+    
+}
